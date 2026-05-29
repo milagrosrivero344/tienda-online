@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Indumentaria | Prototipo</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo-banner">
+            <h1>Nombre de la Marca</h1>
+        </div>
+        <nav class="redes-sociales">
+            <a href="https://instagram.com" target="_blank" class="icono-red"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="icono-red"><i class="fa-brands fa-tiktok"></i></a>
+            
+            <button class="btn-carrito-top" onclick="abrirCarrito()">
+                <i class="fa-solid fa-bag-shopping"></i> Mi Pedido
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <div class="hero-contenido">
+                <h2>Nueva Colección</h2>
+                <p>Prendas diseñadas para potenciar tu identidad y destacar tu figura con un estilo sofisticado.</p>
+                <a href="#catalogo-seccion" class="btn-hero">Ver Temporada</a>
+            </div>
+        </section>
+
+        <div id="catalogo-seccion" style="padding-top: 20px; text-align: center;">
+            <h2>Catálogo de Productos</h2>
+        </div>
+        
+        <nav class="filtros">
+            <button class="btn-filtro active" onclick="filtrarProductos('todos')">Todos</button>
+            <button class="btn-filtro" onclick="filtrarProductos('polleras')">Polleras</button>
+            <button class="btn-filtro" onclick="filtrarProductos('lenceria')">Lencería</button>
+        </nav>
+
+        <section class="grilla-productos">
+            
+            <article class="producto" data-categoria="polleras">
+                <div class="contenedor-imagen">
+                    <img src="imagen-pollera-sin-fondo.png" alt="Pollera Tiro Bajo">
+                </div>
+                <div class="etiquetas-estilismo">
+                    <span class="badge silueta">Reloj de Arena</span>
+                    <span class="badge colorimetria">Invierno Profundo</span>
+                </div>
+                <h3>Pollera Tiro Bajo</h3>
+                <p class="precio">$15.000</p>
+                <button class="btn-comprar" onclick="agregarAlCarrito('Pollera Tiro Bajo', 15000)">
+                    Agregar al carrito
+                </button>
+            </article>
+
+            <article class="producto" data-categoria="lenceria">
+                <div class="contenedor-imagen">
+                    <img src="imagen-lenceria-sin-fondo.png" alt="Conjunto Lencería">
+                </div>
+                <div class="etiquetas-estilismo">
+                    <span class="badge silueta">Destaca Curvas</span>
+                    <span class="badge colorimetria">Contraste Alto</span>
+                </div>
+                <h3>Conjunto Lencería Mayorista</h3>
+                <p class="precio">$22.000</p>
+                <button class="btn-comprar" onclick="agregarAlCarrito('Conjunto Lencería Mayorista', 22000)">
+                    Agregar al carrito
+                </button>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>Envíos a todo el país. Medios de pago: MercadoPago.</p>
+    </footer>
+
+    <aside id="carrito-lateral" class="carrito-oculto">
+        <div class="carrito-header">
+            <h3>Tu Pedido 🛍️</h3>
+            <button class="btn-cerrar" onclick="cerrarCarrito()">X</button>
+        </div>
+        
+        <div id="lista-carrito"></div>
+        
+        <p class="total-carrito">Total: $<span id="total-precio">0</span></p>
+        
+        <button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">
+            Finalizar Pedido por WhatsApp
+        </button>
+        
+        <button class="btn-vaciar" onclick="vaciarCarrito()" style="margin-top: 10px; background: none; border: none; color: #888; text-decoration: underline; cursor: pointer; width: 100%;">
+            Vaciar carrito
+        </button>
+    </aside>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
