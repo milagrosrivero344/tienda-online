@@ -2,7 +2,7 @@
 :root {
     --fondo-principal: #FAFAFC;
     --texto-principal: #111111;
-    --color-acento: #800020;
+    --color-acento: #800020; /* Borgoña profundo de la marca */
     --borde-tarjetas: #E0E0E0;
 }
 
@@ -65,32 +65,30 @@ header {
     background-color: #600018;
 }
 
-/* --- HERO BANNER --- */
 /* --- HERO BANNER DEFINITIVO --- */
 .hero-banner {
     background-color: #1a1a1a;
-    /* Filtro de alta costura: un degradado oscuro con un leve matiz del color acento */
+    /* Filtro viñeta profesional sobre la imagen de tu carpeta imagenes */
     background-image: linear-gradient(rgba(17, 17, 17, 0.7), rgba(128, 0, 32, 0.4)), url('imagenes/banner-belulo.jpg');
     background-size: cover;
-    background-position: center 20%; /* Enfoca la imagen un poco más hacia arriba para destacar el calce de las prendas */
-    height: 500px; /* Lo hacemos un poquito más alto para que sea más imponente */
+    background-position: center 20%;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 20px;
     margin-bottom: 40px;
-    box-shadow: inset 0 -50px 50px -50px var(--fondo-principal); /* Suaviza el corte entre el banner y el catálogo */
+    box-shadow: inset 0 -50px 50px -50px var(--fondo-principal);
 }
 
-/* Le damos un toque extra de elegancia al texto principal */
 .hero-contenido h2 {
     color: var(--fondo-principal);
     font-size: 3.5rem;
     text-transform: uppercase;
     letter-spacing: 4px;
     margin-bottom: 15px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Sombra para máxima lectura */
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
 }
 
 .hero-contenido p {
@@ -118,27 +116,52 @@ header {
     color: white;
 }
 
-/* --- FILTROS --- */
-.filtros {
+/* --- FILTROS ESTILO E-COMMERCE --- */
+.barra-filtros-avanzados {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 15px;
-    margin: 30px 0;
+    margin: 30px 40px;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid var(--borde-tarjetas);
+    border-radius: 8px;
 }
 
-.btn-filtro {
-    background-color: transparent;
+.barra-filtros-avanzados input[type="text"] {
+    padding: 10px 15px;
     border: 1px solid var(--texto-principal);
+    border-radius: 5px;
+    background-color: white;
     color: var(--texto-principal);
-    padding: 8px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    flex-grow: 1;
+    min-width: 200px;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
-.btn-filtro.active, .btn-filtro:hover {
-    background-color: var(--texto-principal);
-    color: white;
+.barra-filtros-avanzados input[type="text"]:focus {
+    border-color: var(--color-acento);
+}
+
+.barra-filtros-avanzados select {
+    padding: 10px 15px;
+    border: 1px solid var(--texto-principal);
+    border-radius: 5px;
+    background-color: white;
+    color: var(--texto-principal);
+    font-size: 0.95rem;
+    cursor: pointer;
+    outline: none;
+    min-width: 150px;
+    transition: border-color 0.3s ease;
+}
+
+.barra-filtros-avanzados select:hover,
+.barra-filtros-avanzados select:focus {
+    border-color: var(--color-acento);
 }
 
 /* --- GRILLA Y PRODUCTOS --- */
@@ -162,20 +185,48 @@ header {
     transform: translateY(-5px);
 }
 
+/* --- CONTENEDOR IMAGEN, LUPA Y FAVORITO --- */
 .contenedor-imagen {
+    position: relative;
+    overflow: hidden; /* Clave para recortar el zoom de la lupa */
     background-color: #F9F9F9;
     border-radius: 8px;
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 250px;
 }
 
-.producto img {
+.contenedor-imagen img {
     width: 100%;
-    max-width: 200px;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.2s ease; /* Zoom ultra suave */
+    transform-origin: center center;
 }
 
+.btn-favorito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.btn-favorito:hover {
+    transform: scale(1.1);
+}
+
+/* --- BADGES Y DETALLES --- */
 .etiquetas-estilismo {
     display: flex;
     justify-content: center;
@@ -196,10 +247,18 @@ header {
     color: #444446;
 }
 
-.badge.colorimetria {
-    background-color: #E2D9DC;
+.btn-talles {
+    background: none;
+    border: none;
+    color: var(--texto-principal);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+.btn-talles:hover {
     color: var(--color-acento);
-    border: 1px solid rgba(128, 0, 32, 0.2);
 }
 
 .precio {
@@ -273,6 +332,35 @@ header {
     border: 1px solid var(--borde-tarjetas);
 }
 
+/* --- SUGERENCIA DE VENTA CRUZADA --- */
+.cross-selling {
+    background-color: #F8F8FA;
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 15px;
+    border-left: 4px solid var(--color-acento);
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+.btn-cross-selling {
+    background: none;
+    border: 1px solid var(--texto-principal);
+    padding: 8px 10px;
+    margin-top: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn-cross-selling:hover {
+    background-color: var(--texto-principal);
+    color: var(--fondo-principal);
+}
+
 .total-carrito {
     font-size: 1.3rem;
     font-weight: bold;
@@ -281,7 +369,7 @@ header {
 }
 
 .btn-whatsapp {
-    background-color: #25D366; /* Verde oficial de WhatsApp */
+    background-color: #25D366; 
     color: white;
     border: none;
     padding: 15px;
@@ -290,6 +378,112 @@ header {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+}
+
+.btn-vaciar {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #888;
+    text-decoration: underline;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* --- VENTANA MODAL GUÍA DE TALLES --- */
+#modal-talles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#modal-talles.modal-visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-contenido {
+    background-color: var(--fondo-principal);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+#modal-talles.modal-visible .modal-contenido {
+    transform: translateY(0);
+}
+
+.btn-cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tabla-talles {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.tabla-talles th, .tabla-talles td {
+    border: 1px solid var(--borde-tarjetas);
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.tabla-talles th {
+    background-color: #ECECEF;
+}
+
+/* --- ALERTAS TOAST (Notificaciones) --- */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background-color: var(--texto-principal);
+    color: var(--fondo-principal);
+    padding: 12px 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-acento);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: deslizarToast 0.3s ease forwards;
+}
+
+@keyframes deslizarToast {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
 /* --- FOOTER --- */
